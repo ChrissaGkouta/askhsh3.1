@@ -2,7 +2,7 @@ import subprocess
 import re
 
 # Παράμετροι πειραμάτων
-degrees = [1000, 5000, 10000] # Ξεκίνα με μικρά. Το 10^5 είναι βαρύ για O(n^2)
+degrees = [20000, 40000, 80000, 100000] # Ξεκίνα με μικρά. Το 10^5 είναι βαρύ για O(n^2)
 processes = [1, 2, 4, 8]
 runs_per_exp = 4
 
@@ -31,7 +31,7 @@ for n in degrees:
         
         for _ in range(runs_per_exp):
             # Εκτέλεση της εντολής MPI
-            cmd = ["mpirun", "-np", str(p), "./poly_mult", str(n)]
+            cmd = ["mpirun", "--oversubscribe", "-np", str(p), "./poly_mult", str(n)]
 
             # Τρέχουμε το subprocess
             try:

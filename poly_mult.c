@@ -155,10 +155,10 @@ int main(int argc, char *argv[]) {
 
         // --- Εκτύπωση Χρόνων ---
         printf("Results for N=%d, Processes=%d\n", n, size);
-        printf("(i) Data Distr Time: %f sec\n", t_send_end - t_send_start);
-        printf("(ii) Calculation Time: %f sec\n", t_calc_end - t_calc_start);
-        printf("(iii) Gather Time: %f sec\n", t_recv_end - t_recv_start);
-        printf("(iv) Total Time: %f sec\n", t_total_end - t_total_start);
+        printf("(i) Data Distr Time: %.9f sec\n", t_send_end - t_send_start);
+        printf("(ii) Calculation Time: %.9f sec\n", t_calc_end - t_calc_start);
+        printf("(iii) Gather Time: %.9f sec\n", t_recv_end - t_recv_start);
+        printf("(iv) Total Time: %.9f sec\n", t_total_end - t_total_start);
         
         // Προαιρετικά: Εκτύπωση αποτελεσμάτων για μικρά n για επαλήθευση
         if (n < 10) {
