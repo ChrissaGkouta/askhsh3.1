@@ -17,7 +17,8 @@ int main(int argc, char *argv[]) {
     int n; // Βαθμός πολυωνύμου
     
     // Μεταβλητές χρονομέτρησης
-    double t_send_start, t_send_end, t_calc_start, t_calc_end, t_recv_start, t_recv_end, t_total_start, t_total_end;
+    double t_send_start = 0.0, t_send_end = 0.0, t_calc_start = 0.0, t_calc_end = 0.0;
+    double t_recv_start = 0.0, t_recv_end = 0.0, t_total_start = 0.0, t_total_end = 0.0;
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
