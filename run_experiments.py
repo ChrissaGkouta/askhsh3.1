@@ -1,13 +1,13 @@
 import subprocess
 import re
 
-# Παράμετροι πειραμάτων
-degrees = [20000, 40000, 80000, 100000] # Ξεκίνα με μικρά. Το 10^5 είναι βαρύ για O(n^2)
+
+degrees = [20000, 40000, 80000, 100000] 
 processes = [1, 2, 4, 8]
 runs_per_exp = 4
 
 def parse_output(output):
-    # Εξαγωγή των χρόνων από το stdout
+    # Εξαγωγή των χρόνων 
     times = {}
     for line in output.split('\n'):
         if "Send Time" in line: times['send'] = float(line.split(':')[1].strip().split()[0])
@@ -30,29 +30,23 @@ for n in degrees:
         results = {'send': [], 'calc': [], 'recv': [], 'total': []}
         
         for _ in range(runs_per_exp):
-            # Εκτέλεση της εντολής MPI
             cmd = ["mpirun", "--oversubscribe", "-np", str(p), "./poly_mult", str(n)]
-
-            # Τρέχουμε το subprocess
             try:
                 result = subprocess.run(cmd, capture_output=True, text=True)
                 
                 if result.returncode != 0:
                     print(f"Error executing N={n}, P={p}")
-                    # Αν αποτύχει, ίσως τυπώσει το error
-                    # print(result.stderr) 
                     continue
                     
-                times = parse_output(result.stdout)
+                times = parse_output(result.stdout))
                 
-                # Έλεγχος αν πήραμε αποτελέσματα (σε περίπτωση που κάτι δεν τυπώθηκε σωστά)
                 if times:
                     for k, v in times.items():
                         results[k].append(v)
             except Exception as e:
                 print(f"Exception running MPI: {e}")
 
-        # Υπολογισμός μέσων όρων (μόνο αν έχουμε δεδομένα)
+        # Υπολογισμός μέσων όρων 
         if results['total']:
             avg_total = calculate_mean(results['total'])
             avg_calc = calculate_mean(results['calc'])
